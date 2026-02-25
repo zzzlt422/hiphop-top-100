@@ -66,7 +66,7 @@
             <span id="player-title">Player</span>
             <button class="close-popup" onclick="closePlayer()">X</button>
         </div>
-        <iframe id="web-frame" src="" referrerpolicy="no-referrer-when-downgrade" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe id="web-frame" src="" sandbox="allow-scripts allow-same-origin allow-popups allow-presentation" referrerpolicy="no-referrer-when-downgrade" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
     <div class="popup-window" id="stats-popup">
@@ -260,4 +260,5 @@
         renderList();
     </script>
 </body>
+
 </html>
