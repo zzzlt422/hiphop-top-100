@@ -5,7 +5,7 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1qQ4y1y76w/?spm_id_from=333.337.search-card.all.click&vd_source=13174093b25a3b37e46289e1cdbb923e"
     },
     {
-        "name": "玛瑙&Priceless&屠宰室",
+        "name": "玛瑙/屠宰室",
         "artist": "Gali",
         "url": "https://www.bilibili.com/video/BV1WR4y1y756/?spm_id_from=333.337.search-card.all.click&vd_source=13174093b25a3b37e46289e1cdbb923e"
     },
@@ -290,11 +290,6 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1TyR6YqEhg/?spm_id_from=333.337.search-card.all.click"
     },
     {
-        "name": "孤独面店",
-        "artist": "Gali",
-        "url": "https://www.bilibili.com/video/BV1iq4y1y7FF/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
         "name": "云飞扬",
         "artist": "MULA SAKEE",
         "url": "https://www.bilibili.com/video/BV1eFqVBnEdt/?spm_id_from=333.337.search-card.all.click"
@@ -315,14 +310,19 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1WgNUzBEqU/?spm_id_from=333.337.search-card.all.click"
     },
     {
+        "name": "返老还童",
+        "artist": "Jony J",
+        "url": "https://www.bilibili.com/video/BV1yE411q7AA/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
         "name": "睡前老报纸",
         "artist": "Jony J",
         "url": "https://music.163.com/song?id=31260615"
     },
     {
-        "name": "God Is",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1144y1k715/?spm_id_from=333.337.search-card.all.click"
+        "name": "孤独面店",
+        "artist": "Gali",
+        "url": "https://www.bilibili.com/video/BV1iq4y1y7FF/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "711",
@@ -370,14 +370,14 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1it411f7JF/?spm_id_from=333.337.search-card.all.click"
     },
     {
-        "name": "落幕",
-        "artist": "Asen/Gali",
-        "url": "https://www.bilibili.com/video/BV1eHbmzyELD/?spm_id_from=333.337.search-card.all.click"
+        "name": "POWER",
+        "artist": "Kanye",
+        "url": "https://www.bilibili.com/video/BV1b34y1F7KD/?spm_id_from=333.337.search-card.all.click"
     },
     {
-        "name": "24",
+        "name": "God Is",
         "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV19S4y1A7Dd/?spm_id_from=333.337.search-card.all.click"
+        "url": "https://www.bilibili.com/video/BV1144y1k715/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "Almost Home",
@@ -395,29 +395,14 @@ const mySongs = [
         "url": ""
     },
     {
-        "name": "FourFiveSeconds",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1Lx411A7ZH/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
         "name": "军火库",
         "artist": "AR",
         "url": "https://www.bilibili.com/video/BV1Cg411f7B7/?spm_id_from=333.337.search-card.all.click"
     },
     {
-        "name": "Dark Fantasy",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1jTKGzZEGH/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
         "name": "Promise",
         "artist": "马思维",
         "url": "https://www.bilibili.com/video/BV1pK4y1J7Pb/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
-        "name": "Earfquake",
-        "artist": "Tyler, The Creater",
-        "url": "https://www.bilibili.com/video/BV18N411C781/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "Hit the Rhyme",
@@ -435,24 +420,19 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1r2WNzfECL/?spm_id_from=333.337.search-card.all.click"
     },
     {
+        "name": "What U Gon Do",
+        "artist": "Asen",
+        "url": "https://www.bilibili.com/video/BV1Xb4y137qk/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
         "name": "卖火柴的小女孩",
         "artist": "马思维",
         "url": "https://www.bilibili.com/video/BV1Xy4y1E7Lx/?spm_id_from=333.337.search-card.all.click"
     },
     {
-        "name": "疲惫的爱",
-        "artist": "依加",
-        "url": "https://www.bilibili.com/video/BV1WW4y147t1/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
-        "name": "Burnin‘ SLowly",
-        "artist": "黄格雷",
-        "url": "https://www.bilibili.com/video/BV1C6mdBJEmP/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
-        "name": "Off The Grid",
+        "name": "Slow Jamz",
         "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1vrHKeREPh/?spm_id_from=333.337.search-card.all.click"
+        "url": "https://www.bilibili.com/video/BV1gx4y1f7k6/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "过程",
@@ -460,14 +440,34 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1HW411n79C/?spm_id_from=333.337.search-card.all.click"
     },
     {
+        "name": "Berry",
+        "artist": "Gali",
+        "url": "https://www.bilibili.com/video/BV1kq8BziEFD/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
+        "name": "24",
+        "artist": "Kanye",
+        "url": "https://www.bilibili.com/video/BV19S4y1A7Dd/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
+        "name": "Burnin‘ SLowly",
+        "artist": "黄格雷",
+        "url": "https://www.bilibili.com/video/BV1C6mdBJEmP/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
+        "name": "CSC 2017 Cypher",
+        "artist": "",
+        "url": "https://www.bilibili.com/video/BV1qx411Y7Ue/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
+        "name": "Off The Grid",
+        "artist": "Kanye",
+        "url": "https://www.bilibili.com/video/BV1vrHKeREPh/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
         "name": "hunger on hillside",
         "artist": "J. Cole",
         "url": "https://www.bilibili.com/video/BV14w411x7JM/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
-        "name": "Slow Jamz",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1gx4y1f7k6/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "DARK",
@@ -480,19 +480,19 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1zZ421e7wR/?spm_id_from=333.337.search-card.all.click"
     },
     {
-        "name": "雪花",
-        "artist": "Yee",
-        "url": "https://www.bilibili.com/video/BV1VW4y1U7oW/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
         "name": "开门见山",
         "artist": "Jony J",
         "url": "https://www.bilibili.com/video/BV1x741117tC/?spm_id_from=333.337.search-card.all.click"
     },
     {
-        "name": "POWER",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1b34y1F7KD/?spm_id_from=333.337.search-card.all.click"
+        "name": "雪花",
+        "artist": "Yee",
+        "url": "https://www.bilibili.com/video/BV1VW4y1U7oW/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
+        "name": "Jeremy Scott Freestyle",
+        "artist": "Gali",
+        "url": "https://www.bilibili.com/video/BV1PJ4m1n7Gg/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "灵魂列车",
