@@ -40,11 +40,6 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1crtKe7E8g/?spm_id_from=333.337.search-card.all.click"
     },
     {
-        "name": "Father Stretch My Hands Pt.1",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1Ek4y1m7uq/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
         "name": "Lost",
         "artist": "Jony J",
         "url": "https://www.bilibili.com/video/BV1st411R7Wb/?spm_id_from=333.337.search-card.all.click"
@@ -58,6 +53,11 @@ const mySongs = [
         "name": "XXX",
         "artist": "Yee",
         "url": "https://music.163.com/song?id=1321382028"
+    },
+    {
+        "name": "Father Stretch My Hands Pt.1",
+        "artist": "Kanye",
+        "url": "https://www.bilibili.com/video/BV1Ek4y1m7uq/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "喜新恋旧",
@@ -415,6 +415,16 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1oX4y1C7j2/?spm_id_from=333.337.search-card.all.click"
     },
     {
+        "name": "卖火柴的小女孩",
+        "artist": "马思维",
+        "url": "https://www.bilibili.com/video/BV1Xy4y1E7Lx/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
+        "name": "24",
+        "artist": "Kanye",
+        "url": "https://www.bilibili.com/video/BV19S4y1A7Dd/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
         "name": "未曾改变",
         "artist": "蛋堡",
         "url": "https://www.bilibili.com/video/BV1r2WNzfECL/?spm_id_from=333.337.search-card.all.click"
@@ -423,16 +433,6 @@ const mySongs = [
         "name": "What U Gon Do",
         "artist": "Asen",
         "url": "https://www.bilibili.com/video/BV1Xb4y137qk/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
-        "name": "卖火柴的小女孩",
-        "artist": "马思维",
-        "url": "https://www.bilibili.com/video/BV1Xy4y1E7Lx/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
-        "name": "Slow Jamz",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1gx4y1f7k6/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "过程",
@@ -445,9 +445,9 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1kq8BziEFD/?spm_id_from=333.337.search-card.all.click"
     },
     {
-        "name": "24",
+        "name": "Slow Jamz",
         "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV19S4y1A7Dd/?spm_id_from=333.337.search-card.all.click"
+        "url": "https://www.bilibili.com/video/BV1gx4y1f7k6/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "Burnin‘ SLowly",
@@ -458,6 +458,11 @@ const mySongs = [
         "name": "CSC 2017 Cypher",
         "artist": "",
         "url": "https://www.bilibili.com/video/BV1qx411Y7Ue/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
+        "name": "Heaven And Hell",
+        "artist": "Kanye",
+        "url": "https://www.bilibili.com/video/BV1Yr4y1v7sV/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "Off The Grid",
@@ -493,10 +498,5 @@ const mySongs = [
         "name": "Jeremy Scott Freestyle",
         "artist": "Gali",
         "url": "https://www.bilibili.com/video/BV1PJ4m1n7Gg/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
-        "name": "灵魂列车",
-        "artist": "功夫胖",
-        "url": "https://music.163.com/song?id=481783845"
     }
 ];
