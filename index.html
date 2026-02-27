@@ -185,64 +185,101 @@
 
         function generateStats() {
             let artistStats = {};
-            songs.forEach((song, index) => {
-                const rank = index + 1;
+
+            // 核心修改 1：使用 .slice(0, 100) 截取前 100 首进行统计，超出的直接忽略
+            songs.slice(0, 100).forEach((song, index) => {
+                const rank = index + 1; // 这里的 rank 就是该歌曲的“全局排名”
                 let points = Math.round(50 + (100 - rank) / 2);
+
                 if (song.artist) {
                     let artists = song.artist.split('/').map(a => a.trim()).filter(a => a !== '');
                     let splitPoints = points / artists.length;
+                    
                     artists.forEach(artist => {
                         if (artist.toLowerCase() === 'higher') {
                             let mScore = splitPoints * 0.6;
                             if (!artistStats['马思维']) artistStats['马思维'] = { totalScore: 0, songs: [] };
-                            artistStats['马思维'].totalScore += mScore; artistStats['马思维'].songs.push({ name: song.name, score: mScore });
+                            artistStats['马思维'].totalScore += mScore;
+                            // 将 rank 作为 globalRank 存入数据中
+                            artistStats['马思维'].songs.push({ name: song.name, score: mScore, globalRank: rank });
+                            
                             let kScore = splitPoints * 0.4;
                             if (!artistStats['KnowKnow']) artistStats['KnowKnow'] = { totalScore: 0, songs: [] };
-                            artistStats['KnowKnow'].totalScore += kScore; artistStats['KnowKnow'].songs.push({ name: song.name, score: kScore });
+                            artistStats['KnowKnow'].totalScore += kScore;
+                            artistStats['KnowKnow'].songs.push({ name: song.name, score: kScore, globalRank: rank });
                         } else {
                             if (!artistStats[artist]) artistStats[artist] = { totalScore: 0, songs: [] };
-                            artistStats[artist].totalScore += splitPoints; artistStats[artist].songs.push({ name: song.name, score: splitPoints });
+                            artistStats[artist].totalScore += splitPoints;
+                            artistStats[artist].songs.push({ name: song.name, score: splitPoints, globalRank: rank });
                         }
                     });
                 }
             });
 
+            // 整理数据：已删除均值和标准差的计算，仅保留总分和歌曲明细
             let sortedArtists = Object.keys(artistStats).map(name => {
+                let artistData = artistStats[name];
                 return { 
-                    name: name, totalScore: Math.round(artistStats[name].totalScore * 10) / 10,
-                    songs: artistStats[name].songs.map(s => ({ name: s.name, score: Math.round(s.score * 10) / 10 })).sort((a, b) => b.score - a.score)
+                    name: name, 
+                    totalScore: Math.round(artistData.totalScore * 10) / 10,
+                    songs: artistData.songs
+                            .map(s => ({ name: s.name, score: Math.round(s.score * 10) / 10, globalRank: s.globalRank }))
+                            .sort((a, b) => b.score - a.score)
                 }; 
             }).sort((a, b) => b.totalScore - a.totalScore); 
 
             statsContent.innerHTML = '';
-            if (sortedArtists.length === 0) { statsContent.innerHTML = '<p style="text-align:center; color:#888;">暂无数据</p>'; return; }
+            if (sortedArtists.length === 0) {
+                statsContent.innerHTML = '<p style="text-align:center; color:#888;">暂无数据，请先添加歌曲</p>';
+                return;
+            }
 
             sortedArtists.forEach((artistData, index) => {
                 let medal = `${index + 1}.`;
+
                 const row = document.createElement('div');
                 row.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 1.2rem; cursor: pointer;";
+                
+                // HTML 渲染：已删除中间的均值标准差 span 标签
                 row.innerHTML = `
                     <span class="rank-medal" style="font-weight: 800; color: #FF5722; width: 30px;">${medal}</span>
                     <span class="artist-name-stat" style="flex-grow: 1; font-weight: 700; user-select: none;">
-                        ${artistData.name} <span style="color: #aaa; font-size: 0.85em; font-weight: normal; margin-left: 4px;">(${artistData.songs.length})</span>
+                        ${artistData.name} 
+                        <span style="color: #aaa; font-size: 0.85em; font-weight: normal; margin-left: 4px;">(${artistData.songs.length})</span>
                         <span class="arrow" style="font-size: 0.8em; color: #bbb; margin-left: 5px; transition: 0.2s;">▶</span>
                     </span>
                     <span class="score" style="font-weight: 800; color: #1976D2;">${artistData.totalScore} 分</span>
                 `;
+
                 const detailsDiv = document.createElement('div');
                 detailsDiv.style.cssText = "display: none; flex-direction: column; background: #f5f5f5; padding: 10px 15px; border-bottom: 1px solid #ddd; font-size: 0.95rem; color: #555; border-radius: 4px; margin-bottom: 5px;";
+                
                 artistData.songs.forEach((song, sIdx) => {
                     const songRow = document.createElement('div');
                     songRow.style.cssText = "display: flex; justify-content: space-between; padding: 4px 0;";
-                    songRow.innerHTML = `<span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80%;">${sIdx + 1}. ${song.name}</span><span style="font-weight: 600; color: #888;">+${song.score}</span>`;
+                    // 在歌名后面保留了 (全局排名)
+                    songRow.innerHTML = `
+                        <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80%;">${sIdx + 1}. ${song.name} (${song.globalRank})</span>
+                        <span style="font-weight: 600; color: #888;">+${song.score}</span>
+                    `;
                     detailsDiv.appendChild(songRow);
                 });
+
                 row.onclick = function() {
                     const arrow = row.querySelector('.arrow');
-                    if (detailsDiv.style.display === 'none') { detailsDiv.style.display = 'flex'; arrow.textContent = '▼'; arrow.style.color = '#FF5722'; } 
-                    else { detailsDiv.style.display = 'none'; arrow.textContent = '▶'; arrow.style.color = '#bbb'; }
+                    if (detailsDiv.style.display === 'none') {
+                        detailsDiv.style.display = 'flex';
+                        arrow.textContent = '▼';
+                        arrow.style.color = '#FF5722'; 
+                    } else {
+                        detailsDiv.style.display = 'none';
+                        arrow.textContent = '▶';
+                        arrow.style.color = '#bbb';
+                    }
                 };
-                statsContent.appendChild(row); statsContent.appendChild(detailsDiv);
+
+                statsContent.appendChild(row);
+                statsContent.appendChild(detailsDiv);
             });
         }
 
@@ -262,3 +299,4 @@
 </body>
 
 </html>
+
