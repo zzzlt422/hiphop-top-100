@@ -55,6 +55,11 @@ const mySongs = [
         "url": "https://music.163.com/song?id=1321382028"
     },
     {
+        "name": "Touch The Sky",
+        "artist": "Kanye",
+        "url": "https://www.bilibili.com/video/BV1NX4y1A7Ed/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
         "name": "Father Stretch My Hands Pt.1",
         "artist": "Kanye",
         "url": "https://www.bilibili.com/video/BV1Ek4y1m7uq/?spm_id_from=333.337.search-card.all.click"
@@ -78,11 +83,6 @@ const mySongs = [
         "name": "陪你过冬天",
         "artist": "Jony J",
         "url": "https://www.bilibili.com/video/BV1Qz4y197aV/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
-        "name": "Flashing Lights",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1GF411D7UQ/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "No Child Left Behind",
@@ -128,6 +128,11 @@ const mySongs = [
         "name": "dancing on my own",
         "artist": "Asen",
         "url": "https://www.bilibili.com/video/BV15c411876K/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
+        "name": "Flashing Lights",
+        "artist": "Kanye",
+        "url": "https://www.bilibili.com/video/BV1GF411D7UQ/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "迷宫",
@@ -195,11 +200,6 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1HW411e7dh/?spm_id_from=333.337.search-card.all.click"
     },
     {
-        "name": "Moon",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1q3411f7vB/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
         "name": "Like Him",
         "artist": "Tyler, The Creater",
         "url": "https://www.bilibili.com/video/BV13uS4YxEKC/?spm_id_from=333.337.search-card.all.click"
@@ -235,6 +235,16 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1gX4y117on/?spm_id_from=333.337.search-card.all.click"
     },
     {
+        "name": "Moon",
+        "artist": "Kanye",
+        "url": "https://www.bilibili.com/video/BV1q3411f7vB/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
+        "name": "We Major",
+        "artist": "Kanye",
+        "url": "https://www.bilibili.com/video/BV1yq4y1z7z5/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
         "name": "Come to Life",
         "artist": "Kanye",
         "url": "https://www.bilibili.com/video/BV1RS4y1Z76E/?spm_id_from=333.337.search-card.all.click"
@@ -243,16 +253,6 @@ const mySongs = [
         "name": "忘了没",
         "artist": "Jony J",
         "url": "https://www.bilibili.com/video/BV1CU4y1F7Da/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
-        "name": "We Major",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1yq4y1z7z5/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
-        "name": "Touch The Sky",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1NX4y1A7Ed/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "热水澡",
@@ -440,6 +440,11 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1HW411n79C/?spm_id_from=333.337.search-card.all.click"
     },
     {
+        "name": "Lord I Need You",
+        "artist": "Kanye",
+        "url": "https://www.bilibili.com/video/BV1qy421B7jw/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
         "name": "Berry",
         "artist": "Gali",
         "url": "https://www.bilibili.com/video/BV1kq8BziEFD/?spm_id_from=333.337.search-card.all.click"
@@ -468,11 +473,6 @@ const mySongs = [
         "name": "Off The Grid",
         "artist": "Kanye",
         "url": "https://www.bilibili.com/video/BV1vrHKeREPh/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
-        "name": "hunger on hillside",
-        "artist": "J. Cole",
-        "url": "https://www.bilibili.com/video/BV14w411x7JM/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "DARK",
