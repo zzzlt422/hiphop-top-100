@@ -120,6 +120,11 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1DV1LYEEYK/?spm_id_from=333.337.search-card.all.click"
     },
     {
+        "name": "We Major",
+        "artist": "Kanye",
+        "url": "https://www.bilibili.com/video/BV1yq4y1z7z5/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
         "name": "Audrey",
         "artist": "Gali",
         "url": "https://www.bilibili.com/video/BV1UM4y1K7Ym/?spm_id_from=333.337.search-card.all.click"
@@ -128,11 +133,6 @@ const mySongs = [
         "name": "dancing on my own",
         "artist": "Asen",
         "url": "https://www.bilibili.com/video/BV15c411876K/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
-        "name": "Flashing Lights",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1GF411D7UQ/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "迷宫",
@@ -145,14 +145,19 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1Xu411Y7Du/?spm_id_from=333.337.search-card.all.click"
     },
     {
-        "name": "版图",
-        "artist": "Asen",
-        "url": "https://www.bilibili.com/video/BV1LK4y1i7By/?spm_id_from=333.337.search-card.all.click"
+        "name": "Flashing Lights",
+        "artist": "Kanye",
+        "url": "https://www.bilibili.com/video/BV1GF411D7UQ/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "收敛水",
         "artist": "蛋堡",
         "url": "https://www.bilibili.com/video/BV14T411E7X1/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
+        "name": "版图",
+        "artist": "Asen",
+        "url": "https://www.bilibili.com/video/BV1LK4y1i7By/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "住你耳朵里",
@@ -238,11 +243,6 @@ const mySongs = [
         "name": "Moon",
         "artist": "Kanye",
         "url": "https://www.bilibili.com/video/BV1q3411f7vB/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
-        "name": "We Major",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1yq4y1z7z5/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "Come to Life",
