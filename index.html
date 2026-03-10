@@ -329,6 +329,7 @@
         <div class="stats-content" id="stats-content"></div>
     </div>
 
+<script src="./data.js"></script>
     <script>
         // --- 新增：自动加载本地图片集 ---
         function loadSideGalleries() {
@@ -370,12 +371,19 @@
         let isEditMode = false;
         let editIndex = -1;
 
-        try {
-            const stored = localStorage.getItem('hiphopTop100');
-            if (stored) songs = JSON.parse(stored);
-            if (!Array.isArray(songs)) throw new Error();
-        } catch (e) {
-            songs = [];
+// 核心修复：优先读取 data.js 里的 mySongs 官方曲库
+        if (typeof mySongs !== 'undefined' && mySongs.length > 0) {
+            // 深拷贝一份数据给 songs 数组
+            songs = JSON.parse(JSON.stringify(mySongs));
+        } else {
+            // 只有当 data.js 不存在或没数据时，才尝试读取本地临时缓存
+            try {
+                const stored = localStorage.getItem('hiphopTop100');
+                if (stored) songs = JSON.parse(stored);
+                if (!Array.isArray(songs)) throw new Error();
+            } catch (e) {
+                songs = [];
+            }
         }
 
         const listEl = document.getElementById('song-list');
