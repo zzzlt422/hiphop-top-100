@@ -85,9 +85,9 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1Qz4y197aV/?spm_id_from=333.337.search-card.all.click"
     },
     {
-        "name": "No Child Left Behind",
+        "name": "We Major",
         "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1534y1F7Bm/?spm_id_from=333.337.search-card.all.click"
+        "url": "https://www.bilibili.com/video/BV1yq4y1z7z5/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "暴风雨",
@@ -118,11 +118,6 @@ const mySongs = [
         "name": "Darling, I",
         "artist": "Tyler, The Creater",
         "url": "https://www.bilibili.com/video/BV1DV1LYEEYK/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
-        "name": "We Major",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1yq4y1z7z5/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "Audrey",
@@ -183,6 +178,11 @@ const mySongs = [
         "name": "Lost In The World",
         "artist": "Kanye",
         "url": "https://www.bilibili.com/video/BV19e41117j7/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
+        "name": "No Child Left Behind",
+        "artist": "Kanye",
+        "url": "https://www.bilibili.com/video/BV1534y1F7Bm/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "山脚",
@@ -465,24 +465,9 @@ const mySongs = [
         "url": "https://www.bilibili.com/video/BV1qx411Y7Ue/?spm_id_from=333.337.search-card.all.click"
     },
     {
-        "name": "Heaven And Hell",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1Yr4y1v7sV/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
-        "name": "Off The Grid",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1vrHKeREPh/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
         "name": "DARK",
         "artist": "Yee",
         "url": "https://www.bilibili.com/video/BV1pZ4y1u7TA/?spm_id_from=333.337.search-card.all.click"
-    },
-    {
-        "name": "BURN",
-        "artist": "Kanye",
-        "url": "https://www.bilibili.com/video/BV1zZ421e7wR/?spm_id_from=333.337.search-card.all.click"
     },
     {
         "name": "开门见山",
@@ -498,5 +483,20 @@ const mySongs = [
         "name": "Jeremy Scott Freestyle",
         "artist": "Gali",
         "url": "https://www.bilibili.com/video/BV1PJ4m1n7Gg/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
+        "name": "ATHENA",
+        "artist": "MULA SAKEE",
+        "url": "https://www.bilibili.com/video/BV1Us4y1z7gF/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
+        "name": "Heaven And Hell",
+        "artist": "Kanye",
+        "url": "https://www.bilibili.com/video/BV1Yr4y1v7sV/?spm_id_from=333.337.search-card.all.click"
+    },
+    {
+        "name": "Off The Grid",
+        "artist": "Kanye",
+        "url": "https://www.bilibili.com/video/BV1vrHKeREPh/?spm_id_from=333.337.search-card.all.click"
     }
 ];
