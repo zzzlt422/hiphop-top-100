@@ -22,13 +22,14 @@
         .star-icon { font-size: 3rem; position: absolute; top: -10px; left: 10px; transform: rotate(-15deg); }
         .title-text { border-bottom: 2px solid var(--ink-color); padding-bottom: 5px; display: inline-block; font-family: var(--font-main); font-weight: 800; letter-spacing: 1px; }
         
-        #stats-btn { position: absolute; right: 0; top: 100%; margin-top: 10px; background: white; color: #FF7043; border: 2px solid #FF7043; padding: 10px 10px; font-size: 1rem; border-radius: 4px; white-space: nowrap; line-height: 1; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+        #stats-btn { position: absolute; right: 0; top: 100%; margin-top: 10px; background: white; color: #FF7043; border: 2px solid #FF7043; padding: 6px 10px; font-size: 1rem; border-radius: 4px; white-space: nowrap; line-height: 1; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
         
         #song-list { list-style: none; padding: 0; margin: 0; }
         .song-item { display: flex; align-items: center; font-size: 1.5rem; margin-bottom: 15px; padding: 8px 5px; background: white; border-bottom: 1px dashed #ddd; justify-content: space-between; }
         .song-item:hover { background: #fffbe6; }
         .left-content { display: flex; align-items: baseline; flex-grow: 1; overflow: hidden; padding-right: 10px; }
         
+        /* 隐藏拖拽点 */
         .rank-num { width: 45px; font-weight: 800; flex-shrink: 0; margin-right: 10px; }
         .song-name { font-weight: 700; line-height: 1.2; margin-right: 15px; white-space: nowrap; }
         .artist-name { color: #666; font-size: 1.2rem; white-space: nowrap; }
@@ -42,14 +43,12 @@
         .popup-window { position: fixed; background: white; border: 3px solid black; box-shadow: 8px 8px 0px rgba(0,0,0,0.2); display: none; flex-direction: column; border-radius: 4px; resize: both; overflow: hidden; font-family: var(--font-main); }
         .popup-header { background: black; color: white; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; flex-shrink: 0; cursor: move; font-weight: 700; }
         .close-popup { background: red; color: white; border: 1px solid white; cursor: pointer; font-family: var(--font-main); font-weight: bold; }
-        
         #player-popup { top: 80px; left: 20px; width: 430px; height: 380px; z-index: 2000; min-width: 280px; min-height: 180px; }
         iframe#web-frame { width: 100%; height: 100%; flex-grow: 1; border: none; background: #000; }
-        
         #stats-popup { top: 80px; right: 40px; width: 380px; height: 520px; z-index: 2001; min-width: 250px; min-height: 200px; background: #fafafa; }
         .stats-content { flex-grow: 1; overflow-y: auto; padding: 15px; }
 
-        /* --- 移动端适配 --- */
+        /* --- 移动端适配 (新增) --- */
         @media screen and (max-width: 768px) {
             .side-gallery { display: none !important; }
             .paper { width: 95%; padding: 15px; margin-top: 10px; min-height: 95vh; }
@@ -82,7 +81,7 @@
             </div>
             <button class="close-popup" onclick="closePlayer()">X</button>
         </div>
-        <iframe id="web-frame" src="" referrerpolicy="no-referrer-when-downgrade" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+        <iframe id="web-frame" src="" sandbox="allow-same-origin allow-scripts allow-popups allow-forms" referrerpolicy="no-referrer-when-downgrade" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
     <div class="popup-window" id="stats-popup">
@@ -113,7 +112,7 @@
         }
         loadSideGalleries();
 
-        // 访客端：直接读取 data.js 里的 mySongs 变量，纯展示
+        // 核心：直接使用 data.js 里的 mySongs 变量，不再使用 localStorage
         let songs = typeof mySongs !== 'undefined' ? mySongs : [];
 
         const listEl = document.getElementById('song-list');
@@ -153,8 +152,7 @@
 
                 if (song.url) {
                     const linkTrigger = document.createElement('span');
-                    // 简单的正则判断用于显示按钮名字
-                    const isYoutube = /youtube\.com|youtu\.be/.test(song.url);
+                    const isYoutube = isYoutubeLink(song.url);
                     if (isYoutube) {
                         linkTrigger.textContent = 'YouTube';
                         linkTrigger.className = 'link-trigger youtube';
@@ -174,6 +172,12 @@
             if (statsPopup.style.display === 'flex') { generateStats(); }
         }
 
+        function isYoutubeLink(url) {
+            if (!url) return false;
+            return /youtube\.com|youtu\.be/.test(url);
+        }
+
+        // 修改：整合了 B站/YouTube 纯净播放器转换逻辑，并动态更新外链按钮
         function playSong(index) {
             const song = songs[index];
             if (!song.url) return;
@@ -181,11 +185,11 @@
             playerPopup.style.display = 'flex';
             playerTitle.textContent = song.name;
             
-            // 更新顶部“App/网页打开”的跳转链接
+            // 动态更新外部跳转按钮链接
             const extLink = document.getElementById('external-link');
             extLink.href = song.url;
 
-            // 匹配 YouTube 和 Bilibili 链接进行纯净播放器转换
+            // 平台链接正则匹配
             const ytRegExp = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
             const biliRegExp = /(?:bilibili\.com\/video\/|m\.bilibili\.com\/video\/)(BV[a-zA-Z0-9]+)/i;
 
@@ -193,10 +197,13 @@
             const biliMatch = song.url.match(biliRegExp);
 
             if (ytMatch && ytMatch[1]) {
+                // YouTube 纯净嵌入
                 webFrame.src = `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1&modestbranding=1&rel=0`;
             } else if (biliMatch && biliMatch[1]) {
+                // Bilibili 官方纯净嵌入
                 webFrame.src = `https://player.bilibili.com/player.html?bvid=${biliMatch[1]}&high_quality=1&danmaku=0&autoplay=1`;
             } else {
+                // 其他链接原样嵌入
                 webFrame.src = song.url;
             }
         }
@@ -208,11 +215,12 @@
 
         function generateStats() {
             let artistStats = {};
-            // 使用 slice(0, 100) 确保只统计前 100 首
+
+            // 核心修改 1：使用 .slice(0, 100) 截取前 100 首进行统计，超出的直接忽略
             songs.slice(0, 100).forEach((song, index) => {
-                const rank = index + 1; // 全局排名
+                const rank = index + 1; // 这里的 rank 就是该歌曲的“全局排名”
                 let points = Math.round(50 + (100 - rank) / 2);
-                
+
                 if (song.artist) {
                     let artists = song.artist.split('/').map(a => a.trim()).filter(a => a !== '');
                     let splitPoints = points / artists.length;
@@ -221,22 +229,24 @@
                         if (artist.toLowerCase() === 'higher') {
                             let mScore = splitPoints * 0.6;
                             if (!artistStats['马思维']) artistStats['马思维'] = { totalScore: 0, songs: [] };
-                            artistStats['马思维'].totalScore += mScore; 
+                            artistStats['马思维'].totalScore += mScore;
+                            // 将 rank 作为 globalRank 存入数据中
                             artistStats['马思维'].songs.push({ name: song.name, score: mScore, globalRank: rank });
                             
                             let kScore = splitPoints * 0.4;
                             if (!artistStats['KnowKnow']) artistStats['KnowKnow'] = { totalScore: 0, songs: [] };
-                            artistStats['KnowKnow'].totalScore += kScore; 
+                            artistStats['KnowKnow'].totalScore += kScore;
                             artistStats['KnowKnow'].songs.push({ name: song.name, score: kScore, globalRank: rank });
                         } else {
                             if (!artistStats[artist]) artistStats[artist] = { totalScore: 0, songs: [] };
-                            artistStats[artist].totalScore += splitPoints; 
+                            artistStats[artist].totalScore += splitPoints;
                             artistStats[artist].songs.push({ name: song.name, score: splitPoints, globalRank: rank });
                         }
                     });
                 }
             });
 
+            // 整理数据：已删除均值和标准差的计算，仅保留总分和歌曲明细
             let sortedArtists = Object.keys(artistStats).map(name => {
                 let artistData = artistStats[name];
                 return { 
@@ -249,35 +259,57 @@
             }).sort((a, b) => b.totalScore - a.totalScore); 
 
             statsContent.innerHTML = '';
-            if (sortedArtists.length === 0) { statsContent.innerHTML = '<p style="text-align:center; color:#888;">暂无数据</p>'; return; }
+            if (sortedArtists.length === 0) {
+                statsContent.innerHTML = '<p style="text-align:center; color:#888;">暂无数据</p>';
+                return;
+            }
 
             sortedArtists.forEach((artistData, index) => {
                 let medal = `${index + 1}.`;
+
                 const row = document.createElement('div');
                 row.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 1.2rem; cursor: pointer;";
+                
+                // HTML 渲染：已删除中间的均值标准差 span 标签
                 row.innerHTML = `
                     <span class="rank-medal" style="font-weight: 800; color: #FF5722; width: 30px;">${medal}</span>
                     <span class="artist-name-stat" style="flex-grow: 1; font-weight: 700; user-select: none;">
-                        ${artistData.name} <span style="color: #aaa; font-size: 0.85em; font-weight: normal; margin-left: 4px;">(${artistData.songs.length})</span>
+                        ${artistData.name} 
+                        <span style="color: #aaa; font-size: 0.85em; font-weight: normal; margin-left: 4px;">(${artistData.songs.length})</span>
                         <span class="arrow" style="font-size: 0.8em; color: #bbb; margin-left: 5px; transition: 0.2s;">▶</span>
                     </span>
                     <span class="score" style="font-weight: 800; color: #1976D2;">${artistData.totalScore} 分</span>
                 `;
+
                 const detailsDiv = document.createElement('div');
                 detailsDiv.style.cssText = "display: none; flex-direction: column; background: #f5f5f5; padding: 10px 15px; border-bottom: 1px solid #ddd; font-size: 0.95rem; color: #555; border-radius: 4px; margin-bottom: 5px;";
+                
                 artistData.songs.forEach((song, sIdx) => {
                     const songRow = document.createElement('div');
                     songRow.style.cssText = "display: flex; justify-content: space-between; padding: 4px 0;";
-                    // 在歌名后面加入了 (全局排名)
-                    songRow.innerHTML = `<span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80%;">${sIdx + 1}. ${song.name} (${song.globalRank})</span><span style="font-weight: 600; color: #888;">+${song.score}</span>`;
+                    // 在歌名后面保留了 (全局排名)
+                    songRow.innerHTML = `
+                        <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80%;">${sIdx + 1}. ${song.name} (${song.globalRank})</span>
+                        <span style="font-weight: 600; color: #888;">+${song.score}</span>
+                    `;
                     detailsDiv.appendChild(songRow);
                 });
+
                 row.onclick = function() {
                     const arrow = row.querySelector('.arrow');
-                    if (detailsDiv.style.display === 'none') { detailsDiv.style.display = 'flex'; arrow.textContent = '▼'; arrow.style.color = '#FF5722'; } 
-                    else { detailsDiv.style.display = 'none'; arrow.textContent = '▶'; arrow.style.color = '#bbb'; }
+                    if (detailsDiv.style.display === 'none') {
+                        detailsDiv.style.display = 'flex';
+                        arrow.textContent = '▼';
+                        arrow.style.color = '#FF5722'; 
+                    } else {
+                        detailsDiv.style.display = 'none';
+                        arrow.textContent = '▶';
+                        arrow.style.color = '#bbb';
+                    }
                 };
-                statsContent.appendChild(row); statsContent.appendChild(detailsDiv);
+
+                statsContent.appendChild(row);
+                statsContent.appendChild(detailsDiv);
             });
         }
 
