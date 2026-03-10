@@ -6,67 +6,319 @@
     <title>Top-100 HipHop Music</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-color: #fcfcfc; --ink-color: #000; --youtube-color: #FF5722; --link-color: #1976D2; --font-main: 'Inter', sans-serif; }
-        body {
-            font-family: var(--font-main); background-color: #FAF0E6; 
-            background-image: url('./0.jpg'); background-size: cover; background-position: center; background-attachment: fixed;
-            display: flex; justify-content: center; padding: 20px; margin: 0; padding-bottom: 100px; position: relative;
+        :root {
+            --bg-color: #fcfcfc;
+            --ink-color: #000;
+            --youtube-color: #FF5722;
+            --link-color: #1976D2;
+            --font-main: 'Inter', sans-serif;
         }
-        .side-gallery { position: fixed; top: 20px; bottom: 20px; width: calc(50vw - 360px); display: flex; flex-direction: column; justify-content: space-around; align-items: center; pointer-events: none; z-index: -1; overflow: hidden; }
-        #left-gallery { left: 0; } #right-gallery { right: 0; }
-        .gallery-img { max-width: 80%; max-height: 22vh; object-fit: cover; border: 6px solid white; border-bottom: 20px solid white; box-shadow: 5px 5px 15px rgba(0,0,0,0.15); border-radius: 2px; animation: gentleSwing 4s ease-in-out infinite; }
-        @keyframes gentleSwing { 0% { transform: rotate(calc(var(--base-angle) - 3deg)); } 50% { transform: rotate(calc(var(--base-angle) + 3deg)); } 100% { transform: rotate(calc(var(--base-angle) - 3deg)); } }
-        
-        .paper { width: 100%; max-width: 650px; background: var(--bg-color); border: 3px solid var(--ink-color); border-radius: 2px 5px 3px 6px; padding: 30px; box-shadow: 10px 10px 0px rgba(0,0,0,0.1); position: relative; min-height: 80vh; margin-top: 20px; z-index: 10; }
-        header { text-align: center; margin-bottom: 30px; font-size: 2.5rem; position: relative; }
-        .star-icon { font-size: 3rem; position: absolute; top: -10px; left: 10px; transform: rotate(-15deg); }
-        .title-text { border-bottom: 2px solid var(--ink-color); padding-bottom: 5px; display: inline-block; font-family: var(--font-main); font-weight: 800; letter-spacing: 1px; }
-        
-        #stats-btn { position: absolute; right: 0; top: 100%; margin-top: 10px; background: white; color: #FF7043; border: 2px solid #FF7043; padding: 6px 10px; font-size: 1rem; border-radius: 4px; white-space: nowrap; line-height: 1; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
-        
+
+        body {
+            font-family: var(--font-main);
+            background-color: #FAF0E6; 
+            /* 如果你想加整体背景图，可以在这里加 background-image: url('...'); */
+	    background-image: url('./0.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed;
+
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+            padding-bottom: 100px;
+            position: relative;
+        }
+
+        /* --- 新增：两侧照片墙容器 --- */
+        .side-gallery {
+            position: fixed; /* 固定在两侧，滚动时不跟着走 */
+            top: 20px;
+            bottom: 20px;
+            width: calc(50vw - 360px); /* 动态宽度：屏幕一半减去中间纸张的一半 */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around; /* 均匀分布 */
+            align-items: center;
+            pointer-events: none; /* 让鼠标点不中图片，防止挡住底层网页的点击 */
+            z-index: -1; /* 放在底层，不要挡住中间的主界面 */
+            overflow: hidden;
+        }
+        #left-gallery { left: 0; }
+        #right-gallery { right: 0; }
+
+	.gallery-img {
+            max-width: 80%;
+            max-height: 22vh; 
+            object-fit: cover;
+            border: 6px solid white; 
+            border-bottom: 20px solid white; 
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.15);
+            border-radius: 2px;
+            
+            /* 核心修改：移除 transition，加入 infinite (无限循环) 的摇摆动画 */
+            /* 默认使用 4秒 缓入缓出，你可以改时间来调整摆动快慢 */
+            animation: gentleSwing 4s ease-in-out infinite;
+        }
+
+        /* 定义摇摆动画：基于 JS 传过来的随机基础角度 (--base-angle) 左右微调 3 度 */
+        @keyframes gentleSwing {
+            0% { transform: rotate(calc(var(--base-angle) - 3deg)); }
+            50% { transform: rotate(calc(var(--base-angle) + 3deg)); }
+            100% { transform: rotate(calc(var(--base-angle) - 3deg)); }
+        }
+        /* -------------------------- */
+
+        .paper {
+            width: 100%;
+            max-width: 650px;
+            background: var(--bg-color);
+            border: 3px solid var(--ink-color);
+            border-radius: 2px 5px 3px 6px; 
+            padding: 30px;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
+            position: relative;
+            min-height: 80vh;
+            margin-top: 20px;
+            z-index: 10; /* 确保中间的纸在最上层 */
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .star-icon {
+            font-size: 3rem;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            transform: rotate(-15deg);
+        }
+
+        .title-text {
+            border-bottom: 2px solid var(--ink-color);
+            padding-bottom: 5px;
+            display: inline-block;
+            font-family: var(--font-main);
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        #stats-btn {
+            position: absolute;
+            right: 0;
+            bottom: 5px;
+            background: white;
+            color: #FF7043;
+            border: 2px solid #FF7043;
+            padding: 5px 20px;
+            font-size: 1.1rem;
+            border-radius: 3px;
+        }
+#stats-btn {
+            position: absolute;
+            right: 0; 
+            top: 100%; 
+            margin-top: 10px; 
+            background: white;
+            color: #FF7043;
+            border: 2px solid #FF7043;
+            padding: 10px 10px; /* 按照你的要求设定大小 */
+            font-size: 1rem; 
+            border-radius: 4px;
+            white-space: nowrap; 
+
+            /* --- 修复文字溢出的关键代码 --- */
+            line-height: 1; /* 强制将行高设为 1，杜绝父级的干扰 */
+            display: inline-flex; /* 使用 flex 布局 */
+            align-items: center; /* 确保文字绝对垂直居中 */
+            justify-content: center; /* 确保文字绝对水平居中 */
+        }
+
+        .input-area {
+            background: #eee;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px dashed #aaa;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        input {
+            font-family: var(--font-main);
+            padding: 10px;
+            border: 2px solid var(--ink-color);
+            background: white;
+            flex: 1;
+            font-size: 1.1rem;
+            min-width: 100px;
+        }
+
+        button { font-family: var(--font-main); cursor: pointer; transition: transform 0.1s; }
+        button:active { transform: scale(0.95); }
+
+        #main-btn {
+            background: var(--ink-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        #main-btn.edit-mode { background: #1976D2; box-shadow: 0 0 5px rgba(25, 118, 210, 0.5); }
+
         #song-list { list-style: none; padding: 0; margin: 0; }
-        .song-item { display: flex; align-items: center; font-size: 1.5rem; margin-bottom: 15px; padding: 8px 5px; background: white; border-bottom: 1px dashed #ddd; justify-content: space-between; }
+
+        .song-item {
+            display: flex;
+            align-items: center; 
+            font-size: 1.5rem; 
+            margin-bottom: 15px;
+            padding: 8px 5px;
+            background: white;
+            border-bottom: 1px dashed #ddd;
+            justify-content: space-between; 
+        }
         .song-item:hover { background: #fffbe6; }
+
         .left-content { display: flex; align-items: baseline; flex-grow: 1; overflow: hidden; padding-right: 10px; }
+
+        .drag-handle { cursor: grab; padding-right: 15px; color: #888; font-size: 1.2rem; }
         
-        /* 隐藏拖拽点 */
         .rank-num { width: 45px; font-weight: 800; flex-shrink: 0; margin-right: 10px; }
+        
         .song-name { font-weight: 700; line-height: 1.2; margin-right: 15px; white-space: nowrap; }
+
         .artist-name { color: #666; font-size: 1.2rem; white-space: nowrap; }
+
         .right-controls { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+
         .link-trigger { font-size: 1.1rem; cursor: pointer; padding: 2px 8px; text-align: center; line-height: 1.2; font-weight: 700; }
         .link-trigger.youtube { color: var(--youtube-color); border: 2px solid var(--youtube-color); border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; transform: rotate(-2deg); display: inline-block; }
         .link-trigger.youtube:hover { background: var(--youtube-color); color: white; }
         .link-trigger.generic { color: var(--link-color); text-decoration: underline; }
         .link-trigger.generic:hover { color: darkblue; }
 
+        .icon-btn { background: none; border: none; font-size: 1.2rem; padding: 0 5px; color: #bbb; }
+        .edit-btn:hover { color: #1976D2; }
+        .delete-btn:hover { color: red; }
+
         .popup-window { position: fixed; background: white; border: 3px solid black; box-shadow: 8px 8px 0px rgba(0,0,0,0.2); display: none; flex-direction: column; border-radius: 4px; resize: both; overflow: hidden; font-family: var(--font-main); }
         .popup-header { background: black; color: white; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; flex-shrink: 0; cursor: move; font-weight: 700; }
         .close-popup { background: red; color: white; border: 1px solid white; cursor: pointer; font-family: var(--font-main); font-weight: bold; }
+
         #player-popup { top: 80px; left: 20px; width: 430px; height: 380px; z-index: 2000; min-width: 280px; min-height: 180px; }
         iframe#web-frame { width: 100%; height: 100%; flex-grow: 1; border: none; background: #000; }
+
         #stats-popup { top: 80px; right: 40px; width: 380px; height: 520px; z-index: 2001; min-width: 250px; min-height: 200px; background: #fafafa; }
         .stats-content { flex-grow: 1; overflow-y: auto; padding: 15px; }
+
+        .reset-section { margin-top: 50px; text-align: center; border-top: 2px dashed #ccc; padding-top: 20px; }
+        #reset-btn { background: #d32f2f; color: white; border: none; padding: 5px 15px; font-size: 1rem; border-radius: 3px; }
+	
+/* --- 移动端适配 --- */
+        @media screen and (max-width: 768px) {
+            /* 1. 隐藏两侧飘动的图片，避免挤压中间内容或撑爆屏幕 */
+            .side-gallery {
+                display: none !important;
+            }
+
+            /* 2. 调整主列表区域的宽度和内边距 */
+            .paper {
+                width: 95%;
+                padding: 15px;
+                margin-top: 10px;
+                min-height: 95vh;
+            }
+
+            /* 3. 修复弹窗在手机上超出屏幕、无法点击关闭的问题 */
+            #player-popup, #stats-popup {
+                width: 90% !important;
+                left: 5% !important;
+                top: 10% !important;
+                height: auto !important;
+                min-height: 250px;
+            }
+            
+            #player-popup {
+                aspect-ratio: 16/9; /* 保持视频播放比例 */
+            }
+
+            #stats-popup {
+                height: 70vh !important; /* 统计窗口限制高度，内容内部滚动 */
+            }
+
+            /* 4. 优化输入区域，改为竖向排列防挤压 */
+            .input-area {
+                flex-direction: column;
+            }
+            .input-area input {
+                width: auto;
+            }
+            #main-btn {
+                width: 100%;
+            }
+
+            /* 5. 优化歌曲列表，允许小屏幕下换行 */
+            .song-item {
+                flex-direction: column;
+                align-items: flex-start;
+                font-size: 1.2rem;
+            }
+            .right-controls {
+                margin-top: 10px;
+                width: 100%;
+                justify-content: flex-end; /* 按钮靠右对齐 */
+            }
+            .left-content {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
+
     <div id="left-gallery" class="side-gallery"></div>
+
     <div class="paper">
         <header>
             <div class="star-icon">☆</div>
             <div class="title-text">Top 100 HipHop Songs</div>
             <button id="stats-btn">Statistics</button>
         </header>
+
+        <div class="input-area">
+            <input type="text" id="input-name" placeholder="歌名 (Name)">
+            <input type="text" id="input-singer" placeholder="歌手 (Singer)">
+            <input type="text" id="input-url" placeholder="链接 (YouTube URL)">
+            <button id="main-btn">Add Song</button>
+        </div>
+
         <ul id="song-list"></ul>
+
+        <div class="reset-section">
+            <button id="reset-btn">Reset All List</button>
+        </div>
     </div>
+
     <div id="right-gallery" class="side-gallery"></div>
 
-    <div class="popup-window" id="player-popup">
+
+<div class="popup-window" id="player-popup">
         <div class="popup-header" id="player-header">
-            <span id="player-title">Player</span>
+            <div style="display: flex; align-items: center; overflow: hidden; white-space: nowrap;">
+                <span id="player-title" style="text-overflow: ellipsis; overflow: hidden;">Player</span>
+                <a id="external-link" href="#" target="_blank" style="color: #FFC107; font-size: 0.85rem; margin-left: 15px; text-decoration: none; flex-shrink: 0; font-weight: normal;">↗️ App/网页打开</a>
+            </div>
             <button class="close-popup" onclick="closePlayer()">X</button>
         </div>
-        <iframe id="web-frame" src="" sandbox="allow-scripts allow-same-origin allow-popups allow-presentation" referrerpolicy="no-referrer-when-downgrade" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe id="web-frame" src="" referrerpolicy="no-referrer-when-downgrade" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
     </div>
 
     <div class="popup-window" id="stats-popup">
@@ -77,33 +329,65 @@
         <div class="stats-content" id="stats-content"></div>
     </div>
 
-    <script src="./data.js"></script>
-
     <script>
+        // --- 新增：自动加载本地图片集 ---
         function loadSideGalleries() {
             const leftGallery = document.getElementById('left-gallery');
             const rightGallery = document.getElementById('right-gallery');
+            
             for (let i = 1; i <= 8; i++) {
                 const img = document.createElement('img');
                 img.className = 'gallery-img';
                 img.src = `./images/${i}.jpg`; 
+
+                // 生成随机基础倾斜角度 (-10度 到 +10度)
                 const randomAngle = Math.floor(Math.random() * 20) - 10;
+                
+                // 核心修改 1：不直接写死 transform，而是传给 CSS 一个自定义变量
                 img.style.setProperty('--base-angle', `${randomAngle}deg`);
+                
+                // 核心修改 2：给每个照片加一个随机的动画延迟时间，这样它们摆动的频率和方向就会错开，显得更自然！
                 const randomDelay = Math.random() * 4; 
-                img.style.animationDelay = `-${randomDelay}s`; 
-                img.onerror = function() { this.style.display = 'none'; };
-                if (i % 2 !== 0) { leftGallery.appendChild(img); } else { rightGallery.appendChild(img); }
+                img.style.animationDelay = `-${randomDelay}s`; // 用负数可以让动画打开网页时就已经在进行中了
+
+                img.onerror = function() {
+                    this.style.display = 'none';
+                };
+
+                if (i % 2 !== 0) {
+                    leftGallery.appendChild(img);
+                } else {
+                    rightGallery.appendChild(img);
+                }
             }
         }
+        // 运行图片加载函数
         loadSideGalleries();
+        // ---------------------------------
 
-        // 核心：直接使用 data.js 里的 mySongs 变量，不再使用 localStorage
-        let songs = typeof mySongs !== 'undefined' ? mySongs : [];
+
+        let songs = [];
+        let isEditMode = false;
+        let editIndex = -1;
+
+        try {
+            const stored = localStorage.getItem('hiphopTop100');
+            if (stored) songs = JSON.parse(stored);
+            if (!Array.isArray(songs)) throw new Error();
+        } catch (e) {
+            songs = [];
+        }
 
         const listEl = document.getElementById('song-list');
+        const mainBtn = document.getElementById('main-btn');
+        const nameInput = document.getElementById('input-name');
+        const singerInput = document.getElementById('input-singer');
+        const urlInput = document.getElementById('input-url');
+        
         const playerPopup = document.getElementById('player-popup');
         const webFrame = document.getElementById('web-frame');
         const playerTitle = document.getElementById('player-title');
+        
         const statsPopup = document.getElementById('stats-popup');
         const statsContent = document.getElementById('stats-content');
 
@@ -112,9 +396,16 @@
             songs.forEach((song, index) => {
                 const li = document.createElement('li');
                 li.className = 'song-item';
+                li.dataset.index = index;
 
                 const leftContent = document.createElement('div');
                 leftContent.className = 'left-content';
+
+                const dragHandle = document.createElement('span');
+                dragHandle.innerHTML = '&#8942;';
+                dragHandle.className = 'drag-handle';
+                dragHandle.draggable = true;
+                addDragEvents(dragHandle, li);
 
                 const rankSpan = document.createElement('span');
                 rankSpan.className = 'rank-num';
@@ -128,6 +419,7 @@
                 artistSpan.className = 'artist-name';
                 artistSpan.textContent = song.artist;
 
+                leftContent.appendChild(dragHandle);
                 leftContent.appendChild(rankSpan);
                 leftContent.appendChild(nameSpan);
                 leftContent.appendChild(artistSpan);
@@ -138,6 +430,7 @@
                 if (song.url) {
                     const linkTrigger = document.createElement('span');
                     const isYoutube = isYoutubeLink(song.url);
+                    
                     if (isYoutube) {
                         linkTrigger.textContent = 'YouTube';
                         linkTrigger.className = 'link-trigger youtube';
@@ -149,12 +442,28 @@
                     rightControls.appendChild(linkTrigger);
                 }
 
+                const editBtn = document.createElement('button');
+                editBtn.className = 'icon-btn edit-btn';
+                editBtn.textContent = '✎';
+                editBtn.onclick = function() { enterEditMode(index); };
+                rightControls.appendChild(editBtn);
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'icon-btn delete-btn';
+                deleteBtn.textContent = 'x';
+                deleteBtn.onclick = function() { deleteSong(index); };
+                rightControls.appendChild(deleteBtn);
+
                 li.appendChild(leftContent);
                 li.appendChild(rightControls);
+
                 listEl.appendChild(li);
             });
+            localStorage.setItem('hiphopTop100', JSON.stringify(songs));
             
-            if (statsPopup.style.display === 'flex') { generateStats(); }
+            if (statsPopup.style.display === 'flex') {
+                generateStats();
+            }
         }
 
         function isYoutubeLink(url) {
@@ -165,25 +474,61 @@
         function getYoutubeEmbed(url) {
             const regExp = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
             const match = url.match(regExp);
-            if (match && match[1]) { return `https://www.youtube.com/embed/${match[1]}?autoplay=1&modestbranding=1&rel=0`; } 
-            else { return url; }
+            if (match && match[1]) {
+                const videoId = match[1];
+                return `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0`;
+            } else {
+                return url;
+            }
         }
 
-        function playSong(index) {
+function playSong(index) {
             const song = songs[index];
             if (!song.url) return;
+
+            // 1. 显示弹窗和标题
             playerPopup.style.display = 'flex';
             playerTitle.textContent = song.name;
-            if (isYoutubeLink(song.url)) { webFrame.src = getYoutubeEmbed(song.url); } 
-            else { webFrame.src = song.url; }
+
+            // 2. 动态更新顶部“App/网页打开”按钮的真实链接
+            const extLink = document.getElementById('external-link');
+            extLink.href = song.url;
+
+            // 3. 核心：平台链接正则匹配与纯净播放器转换
+            const ytRegExp = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+            // 匹配标准 B站 URL 中的 BV 号
+            const biliRegExp = /(?:bilibili\.com\/video\/|m\.bilibili\.com\/video\/)(BV[a-zA-Z0-9]+)/i;
+
+            const ytMatch = song.url.match(ytRegExp);
+            const biliMatch = song.url.match(biliRegExp);
+
+            if (ytMatch && ytMatch[1]) {
+                // YouTube 纯净嵌入
+                webFrame.src = `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1&modestbranding=1&rel=0`;
+            } else if (biliMatch && biliMatch[1]) {
+                // Bilibili 官方纯净嵌入 (静音自动播放或带UI点击播放，无广告无推荐)
+                webFrame.src = `https://player.bilibili.com/player.html?bvid=${biliMatch[1]}&high_quality=1&danmaku=0&autoplay=1`;
+            } else {
+                // 其他链接 (包括 b23.tv 短链、网易云等)，直接在受限的安全 iframe 中原样加载
+                webFrame.src = song.url;
+            }
         }
 
-        window.closePlayer = function() { playerPopup.style.display = 'none'; webFrame.src = ''; }
+        window.closePlayer = function() {
+            playerPopup.style.display = 'none';
+            webFrame.src = '';
+        }
 
-        document.getElementById('stats-btn').addEventListener('click', () => { generateStats(); statsPopup.style.display = 'flex'; });
-        window.closeStats = function() { statsPopup.style.display = 'none'; }
+        document.getElementById('stats-btn').addEventListener('click', () => {
+            generateStats();
+            statsPopup.style.display = 'flex';
+        });
 
-        function generateStats() {
+        window.closeStats = function() {
+            statsPopup.style.display = 'none';
+        }
+
+function generateStats() {
             let artistStats = {};
 
             // 核心修改 1：使用 .slice(0, 100) 截取前 100 首进行统计，超出的直接忽略
@@ -289,14 +634,98 @@
         function makeDraggable(elmnt, header) {
             var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
             header.onmousedown = dragMouseDown;
-            function dragMouseDown(e) { e = e || window.event; e.preventDefault(); pos3 = e.clientX; pos4 = e.clientY; document.onmouseup = closeDragElement; document.onmousemove = elementDrag; }
-            function elementDrag(e) { e = e || window.event; e.preventDefault(); pos1 = pos3 - e.clientX; pos2 = pos4 - e.clientY; pos3 = e.clientX; pos4 = e.clientY; elmnt.style.top = (elmnt.offsetTop - pos2) + "px"; elmnt.style.left = (elmnt.offsetLeft - pos1) + "px"; }
-            function closeDragElement() { document.onmouseup = null; document.onmousemove = null; }
+            function dragMouseDown(e) {
+                e = e || window.event; e.preventDefault();
+                pos3 = e.clientX; pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
+            }
+            function elementDrag(e) {
+                e = e || window.event; e.preventDefault();
+                pos1 = pos3 - e.clientX; pos2 = pos4 - e.clientY;
+                pos3 = e.clientX; pos4 = e.clientY;
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+            }
+            function closeDragElement() {
+                document.onmouseup = null; document.onmousemove = null;
+            }
         }
+
+        let dragStartIndex;
+        function addDragEvents(handle, item) {
+            handle.addEventListener('dragstart', () => {
+                dragStartIndex = +item.getAttribute('data-index');
+                item.classList.add('dragging');
+            });
+            item.addEventListener('dragover', (e) => e.preventDefault());
+            item.addEventListener('drop', () => {
+                const dragEndIndex = +item.getAttribute('data-index');
+                swapItems(dragStartIndex, dragEndIndex);
+                item.classList.remove('dragging');
+            });
+            item.addEventListener('dragend', () => item.classList.remove('dragging'));
+        }
+
+        function swapItems(fromIndex, toIndex) {
+            const itemOne = songs[fromIndex];
+            songs.splice(fromIndex, 1);
+            songs.splice(toIndex, 0, itemOne);
+            if (isEditMode) exitEditMode();
+            renderList();
+        }
+
+        function enterEditMode(index) {
+            const song = songs[index];
+            nameInput.value = song.name; singerInput.value = song.artist; urlInput.value = song.url || '';
+            isEditMode = true; editIndex = index;
+            mainBtn.textContent = "Save Change"; mainBtn.classList.add('edit-mode');
+            nameInput.focus();
+        }
+
+        function exitEditMode() {
+            isEditMode = false; editIndex = -1;
+            mainBtn.textContent = "Add Song"; mainBtn.classList.remove('edit-mode');
+            nameInput.value = ''; singerInput.value = ''; urlInput.value = '';
+        }
+
+mainBtn.addEventListener('click', () => {
+            const name = nameInput.value.trim();
+            const artist = singerInput.value.trim();
+            let url = urlInput.value.trim();
+
+            if (!name) { alert("Please input name!"); return; }
+            if (url && !url.startsWith('http')) url = 'https://' + url;
+
+            const songData = { name, artist, url };
+
+            if (isEditMode) {
+                if (editIndex > -1) { songs[editIndex] = songData; renderList(); exitEditMode(); }
+            } else {
+                // 🛑 把原来这里的 if (songs.length >= 100) ... 这一行删掉
+                
+                const isDuplicate = songs.some(song => song.name === name);
+                if (isDuplicate) { alert("已经添加过了！(This song is already added)"); return; }
+                songs.push(songData); renderList();
+                nameInput.value = ''; singerInput.value = ''; urlInput.value = ''; nameInput.focus(); 
+            }
+        });
+
+        function deleteSong(index) {
+            if(confirm('Delete?')) {
+                songs.splice(index, 1);
+                if (isEditMode && editIndex === index) exitEditMode();
+                renderList();
+            }
+        }
+
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            if(confirm('Clear All?')) {
+                songs = []; exitEditMode(); renderList(); closePlayer(); closeStats();
+            }
+        });
 
         renderList();
     </script>
 </body>
-
 </html>
-
